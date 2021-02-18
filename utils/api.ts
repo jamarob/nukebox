@@ -18,3 +18,9 @@ export async function getTracks() {
 //     .then((response) => response.json())
 //     .then((tracks: APITrack[]) => tracks);
 // }
+
+export async function getTrack(id: string) {
+  const response = await fetch(`/api/tracks/${id}`);
+  const track: APITrack = await response.json();
+  return track;
+}
