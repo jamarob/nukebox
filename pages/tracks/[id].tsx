@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
 import AudioPlayer from "../../components/AudioPlayer";
 import TrackDetails from "../../components/TrackDetails";
 import { APITrack, getTrack } from "../../utils/api";
