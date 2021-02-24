@@ -9,7 +9,7 @@ function ViewsCount() {
     localStorage.setItem("views", String(newViews));
   }, []);
 
-  return <div>{views}</div>;
+  return <div>You visited this page {views} times</div>;
 }
 
 export default ViewsCount;
