@@ -1,16 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function ViewsCount() {
-  if (typeof localStorage === "undefined") {
-    return <div>localStorage is not supported by Server-Side-Rendering</div>;
-  }
+  const [views, setViews] = useState(null);
 
   useEffect(() => {
     const newViews = +localStorage.getItem("views") + 1;
+    setViews(newViews);
     localStorage.setItem("views", String(newViews));
   }, []);
 
-  return <div>{localStorage.getItem("views")}</div>;
+  return <div>{views}</div>;
 }
 
 export default ViewsCount;
