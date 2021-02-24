@@ -7,18 +7,16 @@ import { APITrack, getTrack } from "../../utils/api";
 
 export default function Track() {
   const router = useRouter();
-  const { id } = router.query;
+  const { id: idQuery } = router.query;
+  const id = typeof idQuery === "string" ? idQuery : idQuery[0];
   const [track, setTrack] = useState<APITrack>(null);
-  const [favoriteSongs, setFavoriteSongs] = useLocalStorage(
+  const [favoriteSongs, setFavoriteSongs] = useLocalStorage<string[]>(
     "favoriteSongs",
     []
   );
   const favorite = favoriteSongs.includes(id);
 
   useEffect(() => {
-    if (typeof id !== "string") {
-      return;
-    }
     getTrack(id).then((newTrack) => setTrack(newTrack));
   }, [id]);
 
