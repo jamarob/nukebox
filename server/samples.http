@@ -1,0 +1,14 @@
+### GET HTML of index page
+GET http://localhost:3000
+
+### GET HTML of track page
+GET http://localhost:3000/tracks/scooter_paul-is-dead
+
+### GET all tracks
+GET http://localhost:3000/api/tracks
+
+### GET a single track
+GET http://localhost:3000/api/tracks/scooter_paul-is-dead
+
+### DELETE a single track
+DELETE http://localhost:3000/api/tracks/scooter_paul-is-dead
