@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import AudioPlayer from "../../components/AudioPlayer";
 import TrackDetails from "../../components/TrackDetails";
-import { APITrack, getTrack } from "../../utils/api";
+import { APITrack, deleteTrack, getTrack } from "../../utils/api";
 
 export default function Track() {
   const router = useRouter();
@@ -49,6 +49,7 @@ export default function Track() {
         />
       </main>
       <button onClick={handleFavoriteClick}>{isFavorite ? "💘" : "🖤"}</button>
+      <button onClick={() => deleteTrack(track.id)}>🗑</button>
       <footer>
         <AudioPlayer src={track.audioSrc} />
       </footer>
