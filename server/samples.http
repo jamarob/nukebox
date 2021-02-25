@@ -1,0 +1,32 @@
+### GET all tracks
+http://localhost:3000/api/tracks
+
+### GET a single track
+
+http://localhost:3000/api/tracks/scooter_paul-is-dead
+
+### POST a new track
+
+POST http://localhost:3000/api/tracks HTTP/1.1
+content-type: application/json
+
+{
+    "id": "test",
+    "imgSrc": "https://images.unsplash.com/photo-1613473060226-dd81153a63db?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+    "title": "Paul is Dead",
+    "artist": "Scooter",
+    "audioSrc": "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/KBOO/The_Underscore_Orkestra/No_Money_No_Honey_All_We_Got_Is_Us/The_Underscore_Orkestra_-_02_-_Blue_Draggish.mp3"
+}
+
+### PATCH an existing track
+
+PATCH http://localhost:3000/api/tracks/test HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Paul is Alive"
+}
+
+### DELETE a track
+
+DELETE http://localhost:3000/api/tracks/test HTTP/1.1
