@@ -2,10 +2,3 @@
   display: grid;
   padding: 20px;
 }
-
-.list {
-  margin: 0;
-  padding: 0;
-  display: grid;
-  row-gap: 1em;
-}
