@@ -1,14 +1,15 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import Greeting from "../components/Greeting";
-import TrackItem from "../components/TrackItem";
 import styles from "../styles/Home.module.css";
 import { APITrack, getTracks } from "../utils/api";
-import Link from "next/link";
 import ViewsCount from "../components/ViewsCount";
+import useLocalStorage from "../hooks/useLocalStorage";
+import TrackItemList from "../components/TrackItemList";
 
 export default function Home() {
   const [tracks, setTracks] = useState<APITrack[]>([]);
+  const [favoriteTrackIds] = useLocalStorage<string[]>("favoriteTracks", []);
 
   useEffect(() => {
     console.log("Home page is mounted");
@@ -23,18 +24,13 @@ export default function Home() {
     // doFetch()
   }, []);
 
-  const trackItems = tracks.map((track) => (
-    // <Link href={"/tracks/" + track.id} key={track.id}>
-    <Link href={`/tracks/${track.id}`} key={track.id}>
-      <a>
-        <TrackItem
-          imgSrc={track.imgSrc}
-          artist={track.artist}
-          title={track.title}
-        />
-      </a>
-    </Link>
-  ));
+  const favoriteTracks = tracks.filter((track) =>
+    favoriteTrackIds.includes(track.id)
+  );
+
+  const notFavoriteTracks = tracks.filter(
+    (track) => !favoriteTrackIds.includes(track.id)
+  );
 
   return (
     <div className={styles.container}>
@@ -44,7 +40,10 @@ export default function Home() {
       </Head>
       <ViewsCount />
       <Greeting name="Philipp" />
-      <ul className={styles.list}>{trackItems}</ul>
+      <h3>Favorites</h3>
+      <TrackItemList items={favoriteTracks} />
+      <h3>Others</h3>
+      <TrackItemList items={notFavoriteTracks} />
     </div>
   );
 }
