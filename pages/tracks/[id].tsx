@@ -34,6 +34,11 @@ export default function Track() {
     }
   };
 
+  const handleDeleteClick = async () => {
+    await deleteTrack(track.id);
+    router.back();
+  };
+
   if (!track) {
     return <div>Loading...</div>;
   }
@@ -49,7 +54,7 @@ export default function Track() {
         />
       </main>
       <button onClick={handleFavoriteClick}>{isFavorite ? "💘" : "🖤"}</button>
-      <button onClick={() => deleteTrack(track.id)}>🗑</button>
+      <button onClick={handleDeleteClick}>🗑</button>
       <footer>
         <AudioPlayer src={track.audioSrc} />
       </footer>
