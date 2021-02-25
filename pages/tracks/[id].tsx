@@ -13,24 +13,24 @@ export default function Track() {
   }
   const id = typeof idQuery !== "string" ? idQuery[0] : idQuery;
   const [track, setTrack] = useState<APITrack>(null);
-  const [favoriteSongs, setFavoriteSongs] = useLocalStorage<string[]>(
-    "favoriteSongs",
+  const [favoriteTrackIds, setFavoriteTrackIds] = useLocalStorage<string[]>(
+    "favoriteTracks",
     []
   );
-  const favorite = favoriteSongs.includes(id);
+  const isFavorite = favoriteTrackIds.includes(id);
 
   useEffect(() => {
     getTrack(id).then((newTrack) => setTrack(newTrack));
   }, [id]);
 
   const handleFavoriteClick = () => {
-    if (favorite) {
-      const newFavoriteSongs = favoriteSongs.filter(
-        (favoriteSong) => favoriteSong !== id
+    if (isFavorite) {
+      const newFavoriteTracks = favoriteTrackIds.filter(
+        (favoritTrack) => favoritTrack !== id
       );
-      setFavoriteSongs(newFavoriteSongs);
+      setFavoriteTrackIds(newFavoriteTracks);
     } else {
-      setFavoriteSongs([...favoriteSongs, id]);
+      setFavoriteTrackIds([...favoriteTrackIds, id]);
     }
   };
 
@@ -48,7 +48,7 @@ export default function Track() {
           artist={track.artist}
         />
       </main>
-      <button onClick={handleFavoriteClick}>{favorite ? "💘" : "🖤"}</button>
+      <button onClick={handleFavoriteClick}>{isFavorite ? "💘" : "🖤"}</button>
       <footer>
         <AudioPlayer src={track.audioSrc} />
       </footer>
