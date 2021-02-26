@@ -11,11 +11,15 @@ export default function Home() {
   const [tracks, setTracks] = useState<APITrack[]>([]);
   const [favoriteTrackIds] = useLocalStorage<string[]>("favoriteTracks", []);
 
-  useEffect(() => {
-    console.log("Home page is mounted");
+  function refreshTracks() {
     getTracks().then((newTracks) => {
       setTracks(newTracks);
     });
+  }
+
+  useEffect(() => {
+    console.log("Home page is mounted");
+    refreshTracks();
 
     // async function doFetch() {
     //   const newTracks = await getTracks();
@@ -41,9 +45,9 @@ export default function Home() {
       <ViewsCount />
       <Greeting name="Philipp" />
       <h3>Favorites</h3>
-      <TrackItemList items={favoriteTracks} />
+      <TrackItemList items={favoriteTracks} onTrackDeleted={refreshTracks} />
       <h3>Others</h3>
-      <TrackItemList items={notFavoriteTracks} />
+      <TrackItemList items={notFavoriteTracks} onTrackDeleted={refreshTracks} />
     </div>
   );
 }
